@@ -1,0 +1,34 @@
+spring:
+  application:
+   name: ecom-application
+  h2:
+   console:
+      enabled: true
+  datasource:
+    url: jdbc:h2:mem:test
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+management:
+  endpoints:
+    web:
+      exposure:
+        include: beans, health
+  endpoint:
+    health:
+      show-details: always
+    shutdown:
+      enabled: true
+  info:
+    env:
+      enabled: true
+
+server:
+  shutdown: graceful
+
+info:
+    app:
+      name: My App
+      description: App Built by Venumadhav
+      version: 1.0v
