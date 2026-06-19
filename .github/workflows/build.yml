@@ -19,10 +19,13 @@ jobs:
       - name: Build app
         run: ./mvnw clean package -DskipTests
 
-      - name: Run app
+      - name: Start app
         run: |
-          nohup java -jar target/*.jar &
-          sleep 20
+          nohup java -jar target/*.jar > app.log 2>&1 &
+          sleep 30
 
-      - name: Test app
-        run: curl http://localhost:8080
+      - name: Check app
+        run: curl -f http://localhost:8080 || (echo "App not responding" && exit 1)
+
+      - name: Show logs (debug)
+        run: cat app.log
